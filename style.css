@@ -24,10 +24,28 @@ form{
         width: 75%;
         border-radius: 15px;
         border: none;
+        margin-bottom: 30px;
     }
 
     & input:last-child{
         margin: 15px;
         width: 60%;
+    }
+
+    & input[type="checkbox"] {
+        width: 20px;
+        height: 15px;
+
+    }
+
+    & .error-message {
+        color: red;
+        font-size: 10px;
+        margin-top: 3px;
+        display: block;
+    }
+
+    & .error {
+        border: 2px solid red;
     }
 }
