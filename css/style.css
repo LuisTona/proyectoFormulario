@@ -1,5 +1,4 @@
 body{
-    background-image: url(../img/imagen.png);
     display: flex;
     justify-content: center;
     align-items:center ;
@@ -41,11 +40,17 @@ form{
     & .error-message {
         color: red;
         font-size: 10px;
-        margin-top: 3px;
-        display: block;
+        display: none;
+    }
+    & p{
+        margin: 0px;
     }
 
     & .error {
         border: 2px solid red;
+    }
+
+    & #enviar{
+        cursor: pointer
     }
 }

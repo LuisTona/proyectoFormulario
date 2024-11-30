@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <form id="formulario" action="#" method="post">
+    <form id="formulario" action="" method="post">
         
         <label for="nombre">Nombre *</label>
         <input type="text" name="nombre" id="nombre">
@@ -18,26 +18,41 @@
 
         <label for="apellido1">Primer apellido *</label>
         <input type="text" name="apellido1" id="apellido1">
+        <div id="errorNombre" class="error-message">
+            <p>Primer Apellido obligatorio</p>
+        </div>
 
         <label for="apellido2">Segundo apellido</label>
         <input type="text" name="apellido2" id="apellido2">
 
         <label for="mail">Correo electronico *</label>
         <input type="email" name="mail" id="mail">
+        <div id="errorNombre" class="error-message">
+            <p>Correo obligatorio</p>
+        </div>
 
         <label for="pass">Contraseña *</label>
         <input type="password" name="pass" id="pass">
+        <div id="errorNombre" class="error-message">
+            <p>Contraseña obligatoria</p>
+        </div>
 
         <label for="confirmPass">Confirmar contraseña *</label>
-        <input type="password" name="confirmPass" id="confirmPass"
-        >
+        <input type="password" name="confirmPass" id="confirmPass">
+        <div id="errorNombre" class="error-message">
+            <p>Contraseña obligatoria</p>
+        </div>
+        
         <label for="privacidad">
             <input type="checkbox" name="privacidad" id="privacidad">
             Acepto la políticas de privacidad *
         </label>
+        <div id="errorNombre" class="error-message">
+            <p>politicas obligatorias</p>
+        </div>
         
-        <!-- <input type="text" name="" id=""> -->
-        <input type="submit" value="Enviar">
+        
+        <input type="submit" value="Enviar" id="enviar">
     </form>
 
     <script src="./js/from.js"></script>
