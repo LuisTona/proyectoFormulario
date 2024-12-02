@@ -8,7 +8,7 @@ const confirPass= document.getElementById('confirmPass');
 const privacidad = document.getElementById('privacidad');
 const errorMensaje = document.querySelectorAll('.error-message');
 const regExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-const passExp = /[a-zA-Z0-9]{8,16}$ /;
+const passExp = /[a-zA-Z0-9._%&@€]{8,16}/;
 
 let campo = [
     {campo: nombre, valor: errorMensaje[0]},
@@ -19,72 +19,38 @@ let campo = [
     {campo: privacidad, valor: errorMensaje[7]},
 ];
 
+// Validaciones del nombre
 nombre.addEventListener('blur', ()=>{
-    if(nombre.value.trim() === ''){
-        errorMensaje[0].style.display = 'block';
-        nombre.classList.add('incorrecto')
-    }
+    validaciones(nombre, 0);
 });
 
 nombre.addEventListener('keypress', ()=>{
-    if(nombre.classList.contains('incorrecto')){
-        nombre.classList.remove('incorrecto')
-    }
-})
+    validaciones(nombre, 0);
+});
 
+// Validaciones del apellido
 apellido1.addEventListener('blur', ()=>{
-    if(apellido1.value.trim() === ''){
-        errorMensaje[1].style.display = 'block';
-        apellido1.classList.add('incorrecto')
-    }
+    validaciones(apellido1, 1)
 });
 
 apellido1.addEventListener('keypress', ()=>{
-    if(apellido1.classList.contains('incorrecto')){
-        apellido1.classList.remove('incorrecto')
-    }
+    validaciones(apellido1, 1)
 })
 
+// Validaciones del correo
 correo.addEventListener('blur', ()=>{
-    if(correo.value.trim() === ''){
-        errorMensaje[2].style.display = 'block';
-        correo.classList.add('incorrecto')
-    }else{
-        correo.classList.remove('incorrecto')
-        errorMensaje[2].style.display = 'none';
-    }
+    validaciones(correo, 2)
 });
 correo.addEventListener('keypress', ()=>{
-    if(correo.classList.contains('incorrecto')){
-        correo.classList.remove('incorrecto')
-    }
-    if(!regExp.test(correo.value)){
-        errorMensaje[3].style.display = 'block';
-        correo.classList.add('incorrecto')
-    }else{
-        errorMensaje[2].style.display = 'none';
-        errorMensaje[3].style.display = 'none';
-    }
+    validaciones(correo, 2)
+    validacionExpresiones(contraseña, passExp, 3)
 })
 
 contraseña.addEventListener('blur', ()=>{
-    if(contraseña.value.trim() === ''){
-        errorMensaje[4].style.display = 'block';
-        contraseña.classList.add('incorrecto')
-    }else{
-        contraseña.classList.remove('incorrecto')
-        errorMensaje[4].style.display = 'none';
-    }
-    console.log(passExp.test(contraseña.value));
-    if(!passExp.test(contraseña.value)){
-        contraseña.classList.add('incorrecto')
-        errorMensaje[5].style.display = 'block';
-    }else{
-        contraseña.classList.remove('incorrecto')
-        errorMensaje[5].style.display = 'none';
-        
-    }
-})
+    validaciones(contraseña, 4);
+    validacionExpresiones(contraseña, passExp, 5);
+});
+
 document.querySelector('#formulario').addEventListener('submit', function(event) {
     event.preventDefault();
   
@@ -106,6 +72,27 @@ document.querySelector('#formulario').addEventListener('submit', function(event)
     }else{
         alert("Las contraseñas no son iguales");
     }
-    
 
 });
+
+// Funcion para hacer una validacion a todos los elementos
+function validaciones(elemento, numError){
+    if(elemento.value.trim() ===''){
+        elemento.classList.add('incorrecto')
+        errorMensaje[numError].style.display = 'block'
+    }else{
+        elemento.classList.remove('incorrecto')
+        errorMensaje[numError].style.display = 'none'
+    }
+}
+
+// Funcion para validar las expresiones regulares
+function validacionExpresiones(elemento, expresion, numError){
+    if(!expresion.test(elemento.value) && !elemento.classList.contains('incorrecto')){
+        elemento.classList.add('incorrecto')
+        errorMensaje[numError].style.display = 'block';
+    }else{
+        elemento.classList.remove('incorrecto')
+        errorMensaje[numError].style.display = 'none';
+    }
+}
