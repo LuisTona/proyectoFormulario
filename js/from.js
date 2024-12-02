@@ -16,7 +16,7 @@ let campo = [
     {campo: correo, valor: errorMensaje[2]},
     {campo: contraseña, valor: errorMensaje[4]},
     {campo: confirPass, valor: errorMensaje[6]},
-    {campo: privacidad, valor: errorMensaje[7]},
+    {campo: privacidad, valor: errorMensaje[7]}
 ];
 
 // Validaciones del nombre
@@ -30,20 +30,20 @@ nombre.addEventListener('keypress', ()=>{
 
 // Validaciones del apellido
 apellido1.addEventListener('blur', ()=>{
-    validaciones(apellido1, 1)
+    validaciones(apellido1, 1);
 });
 
 apellido1.addEventListener('keypress', ()=>{
-    validaciones(apellido1, 1)
+    validaciones(apellido1, 1);
 })
 
 // Validaciones del correo
 correo.addEventListener('blur', ()=>{
-    validaciones(correo, 2)
+    validaciones(correo, 2);
 });
 correo.addEventListener('keypress', ()=>{
-    validaciones(correo, 2)
-    validacionExpresiones(contraseña, passExp, 3)
+    validaciones(correo, 2);
+    validacionExpresiones(contraseña, passExp, 3);
 })
 
 contraseña.addEventListener('blur', ()=>{
@@ -65,7 +65,10 @@ document.querySelector('#formulario').addEventListener('submit', function(event)
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
         if(nombre.value.trim() !== '' && apellido1.value.trim() !== '' && correo.value.trim() !== '' && contraseña.value.trim() !== '' && privacidad.value.trim() !== ''){
+            
             localStorage.setItem('usuario', JSON.stringify(data));
+            window.location.replace('./login.html');
+
         }else{
             alert("Falta algun campo por rellenar");
         }
