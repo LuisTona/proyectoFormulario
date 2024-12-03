@@ -9,6 +9,13 @@ const privacidad = document.getElementById('privacidad');
 const errorMensaje = document.querySelectorAll('.error-message');
 const regExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 const passExp = /[a-zA-Z0-9._%&@€]{8,16}/;
+// const nombreExp = /$[A-Za-z]/
+const nombreExp=/^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/;
+
+// ^: Inicio de la cadena.
+// [A-Za-zÁÉÍÓÚáéíóúñÑ\s]: La cadena puede contener solo letras (mayúsculas o minúsculas), letras con tildes, la letra ñ y espacios.
+// +: Al menos un carácter debe coincidir con los caracteres permitidos.
+// $: Fin de la cadena.
 
 let campo = [
     {campo: nombre, valor: errorMensaje[0]},
@@ -22,33 +29,50 @@ let campo = [
 // Validaciones del nombre
 nombre.addEventListener('blur', ()=>{
     validaciones(nombre, 0);
+    validacionExpresiones(nombre, nombreExp, 0);
 });
 
 nombre.addEventListener('keypress', ()=>{
     validaciones(nombre, 0);
+    validacionExpresiones(nombre, nombreExp, 0)
 });
 
 // Validaciones del apellido
 apellido1.addEventListener('blur', ()=>{
     validaciones(apellido1, 1);
+    validacionExpresiones(nombre, nombreExp, 1);
+
 });
 
 apellido1.addEventListener('keypress', ()=>{
     validaciones(apellido1, 1);
+    validacionExpresiones(apellido1, nombreExp, 1)
+})
+
+
+apellido2.addEventListener('blur', ()=>{
+    validaciones(apellido2, 2);
+    validacionExpresiones(nombre, nombreExp, 2);
+
+});
+
+apellido2.addEventListener('keypress', ()=>{
+    validaciones(apellido2, 2);
+    validacionExpresiones(apellido1, nombreExp, 2)
 })
 
 // Validaciones del correo
 correo.addEventListener('blur', ()=>{
-    validaciones(correo, 2);
+    validaciones(correo, 3);
 });
 correo.addEventListener('keypress', ()=>{
-    validaciones(correo, 2);
-    validacionExpresiones(contraseña, passExp, 3);
+    validaciones(correo, 3);
+    validacionExpresiones(contraseña, regExp, 3);
 })
 
 contraseña.addEventListener('blur', ()=>{
     validaciones(contraseña, 4);
-    validacionExpresiones(contraseña, passExp, 5);
+    validacionExpresiones(contraseña, passExp, 4);
 });
 
 document.querySelector('#formulario').addEventListener('submit', function(event) {
@@ -60,21 +84,33 @@ document.querySelector('#formulario').addEventListener('submit', function(event)
             valor.style.display = 'block';
         }
     });
-    
-    if(contraseña.value === confirPass.value){
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-        if(nombre.value.trim() !== '' && apellido1.value.trim() !== '' && correo.value.trim() !== '' && contraseña.value.trim() !== '' && privacidad.value.trim() !== ''){
-            
-            localStorage.setItem('usuario', JSON.stringify(data));
-            window.location.replace('./login.html');
 
+    campo.forEach(campo =>{
+        if(!campo.classList.contains('incorrecto')){
+
+            if(contraseña.value === confirPass.value && !campo.classList.contains('incorrecto')){
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData);
+                if(nombre.value.trim() !== '' && apellido1.value.trim() !== '' && correo.value.trim() !== '' && contraseña.value.trim() !== '' && privacidad.value.trim() !== ''){
+                    
+                    localStorage.setItem('usuario', JSON.stringify(data));
+                    // window.location.replace('./login.html');
+        
+                }else{
+                    alert("Falta algun campo por rellenar");
+                }
+            }else{
+                alert("Las contraseñas no son iguales");
+            }
+        
         }else{
-            alert("Falta algun campo por rellenar");
+            alert()
         }
-    }else{
-        alert("Las contraseñas no son iguales");
-    }
+    })
+    
+    
+   
+    
 
 });
 
@@ -94,6 +130,7 @@ function validacionExpresiones(elemento, expresion, numError){
     if(!expresion.test(elemento.value) && !elemento.classList.contains('incorrecto')){
         elemento.classList.add('incorrecto')
         errorMensaje[numError].style.display = 'block';
+        // console.log('a');
     }else{
         elemento.classList.remove('incorrecto')
         errorMensaje[numError].style.display = 'none';
