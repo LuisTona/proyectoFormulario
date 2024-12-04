@@ -50,13 +50,6 @@ form {
     text-align: center;
 }
 
-#loginCorrecto {
-    font-size: 18px;
-    color: green;
-    display: none;
-    margin-bottom: 20px;
-}
-
 label {
     display: block;
     margin-top: 12px;
