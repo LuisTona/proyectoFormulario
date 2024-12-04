@@ -85,7 +85,7 @@ document.querySelector('#formulario').addEventListener('submit', function(event)
         }
     });
 
-    campo.forEach(campo =>{
+    campo.forEach(({campo, valor}) =>{
         if(!campo.classList.contains('incorrecto')){
 
             if(contraseña.value === confirPass.value && !campo.classList.contains('incorrecto')){
@@ -104,7 +104,7 @@ document.querySelector('#formulario').addEventListener('submit', function(event)
             }
         
         }else{
-            alert()
+            alert("Los campos son incorrectos");
         }
     })
     

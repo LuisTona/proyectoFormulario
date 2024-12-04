@@ -8,7 +8,8 @@ form.addEventListener('submit', (e)=>{
     const data = Object.fromEntries(formData);
 
     if(datos.nombre == data.user && datos.pass == data.contraseña){
-        let h1 = document.querySelector('h1');
-        h1.style.display = 'block';
+        alert("Has sido logeado");
+    }else{
+        alert("Nombre o Contraseña Incorrectos");
     }
 })
