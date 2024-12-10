@@ -3,13 +3,14 @@ const form = document.querySelector('form');
 
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
+
     let datos = JSON.parse(localStorage.usuario);
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
-
-    if(datos.nombre == data.user && datos.pass == data.contraseña){
-        alert("Has sido logeado");
-    }else{
-        alert("Nombre o Contraseña Incorrectos");
-    }
+    console.log(datos);
+    // if(datos.nombre == data.user && datos.pass == data.contraseña){
+    //     window.location.replace('./landingPage.html');
+    // }else{
+    //     alert("Nombre o Contraseña Incorrectos");
+    // }
 })

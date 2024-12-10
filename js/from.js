@@ -9,7 +9,6 @@ const privacidad = document.getElementById('privacidad');
 const errorMensaje = document.querySelectorAll('.error-message');
 const regExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 const passExp = /[a-zA-Z0-9._%&@€]{8,16}/;
-// const nombreExp = /$[A-Za-z]/
 const nombreExp=/^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/;
 
 // ^: Inicio de la cadena.
@@ -28,102 +27,82 @@ let campo = [
 
 // Validaciones del nombre
 nombre.addEventListener('blur', ()=>{
-    // validaciones(nombre, 0);
     validacionExpresiones(nombre, nombreExp, 0);
 });
 
 nombre.addEventListener('keyup', ()=>{
-    // validaciones(nombre, 0);
     validacionExpresiones(nombre, nombreExp, 0)
 });
 
 // Validaciones del apellido
 apellido1.addEventListener('blur', ()=>{
-    // validaciones(apellido1, 1);
-    validacionExpresiones(nombre, nombreExp, 1);
+    validacionExpresiones(apellido1, nombreExp, 1);
 });
 
 apellido1.addEventListener('keyup', ()=>{
-    // validaciones(apellido1, 1);
     validacionExpresiones(apellido1, nombreExp, 1)
 })
 
-
-// apellido2.addEventListener('blur', ()=>{
-//     // validaciones(apellido2, 2);
-//     validacionExpresiones(nombre, nombreExp, 2);
-
-// });
-
-// apellido2.addEventListener('keypress', ()=>{
-//     // validaciones(apellido2, 2);
-//     validacionExpresiones(apellido1, nombreExp, 2)
-// })
-
 // Validaciones del correo
 correo.addEventListener('blur', ()=>{
-    // validaciones(correo, 3);
     validacionExpresiones(correo, regExp, 2);
 });
 correo.addEventListener('keypress', ()=>{
-    // validaciones(correo, 3);
     validacionExpresiones(correo, regExp, 2);
 })
 
 contraseña.addEventListener('blur', ()=>{
-    // validaciones(contraseña, 4);
     validacionExpresiones(contraseña, passExp, 4);
 });
 
 document.querySelector('#formulario').addEventListener('submit', function(event) {
     event.preventDefault();
-  
-    campo.forEach(({campo, valor}) => {
-        if(campo.value.trim() === ''){
-            campo.classList.add('incorrecto');
-            valor.style.display = 'block';
+    let objetoUsuarios = JSON.parse(localStorage.usuario);
+    let usuarios = [];
+    for(let i in objetoUsuarios){
+        if(i === 'nombre'){
+            for(let k in objetoUsuarios){
+
+                usuarios.push(objetoUsuarios[k]);  
+            }
         }
-    });
+    }
+    console.log(usuarios);
 
-    campo.forEach(({campo, valor}) =>{
-        if(!campo.classList.contains('incorrecto')){
-
-            if(contraseña.value === confirPass.value && !campo.classList.contains('incorrecto')){
+    if(!comprobacionUsuarios()){
+        campo.forEach(({campo, valor}) => {
+            if(campo.value.trim() === ''){
+                campo.classList.add('incorrecto');
+                valor.style.display = 'block';
+            }else if(contraseña.value === confirPass.value){
+                    
                 const formData = new FormData(form);
                 const data = Object.fromEntries(formData);
-                if(nombre.value.trim() !== '' && apellido1.value.trim() !== '' && correo.value.trim() !== '' && contraseña.value.trim() !== '' && privacidad.value.trim() !== ''){
-                    
-                    localStorage.setItem('usuario', JSON.stringify(data));
-                    // window.location.replace('./login.html');
-        
-                }else{
-                    alert("Falta algun campo por rellenar");
-                }
-            }else{
-                alert("Las contraseñas no son iguales");
-            }
-        
-        }else{
-            alert("Los campos son incorrectos");
-        }
-    })
+                // if(nombre.value.trim() !== '' && apellido1.value.trim() !== '' && correo.value.trim() !== '' && contraseña.value.trim() !== '' && privacidad.value.trim() !== ''){
+                //     localStorage.setItem('usuario', JSON.stringify(data));
+                //     window.location.assign('./landingPage.html');
+                // }
+            } 
+        });
+    }else{
+        alert('usuario registrado')
+    }
     
-    
-   
-    
-
+    if(contraseña.value !== confirPass.value){
+        alert("Las contraseñas no coinciden");
+    }else{
+        alert("Falta algun campo por rellenar");
+    }
 });
 
-// Funcion para hacer una validacion a todos los elementos
-function validaciones(elemento, numError){
-}
-
-// Funcion para validar las expresiones regulares
+// Funcion para hacer una validacion a todos los elementos y expresiones regulares
 function validacionExpresiones(elemento, expresion, numError){
     if(elemento.value.trim() ===''){
         elemento.classList.add('incorrecto')
         errorMensaje[numError].style.display = 'block'
         errorMensaje[numError + 1].style.display = 'none';
+        console.log(elemento);
+
     }else if((!expresion.test(elemento.value) ) ){
         elemento.classList.add('incorrecto')
         errorMensaje[numError].style.display = 'none'
@@ -135,8 +114,8 @@ function validacionExpresiones(elemento, expresion, numError){
         errorMensaje[numError].style.display = 'none';
 
     }
-    // else{
-    //     elemento.classList.remove('incorrecto')
-    //     errorMensaje[numError].style.display = 'none'
-    // }
+}
+
+function comprobacionUsuarios(){
+
 }
