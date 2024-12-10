@@ -28,50 +28,50 @@ let campo = [
 
 // Validaciones del nombre
 nombre.addEventListener('blur', ()=>{
-    validaciones(nombre, 0);
+    // validaciones(nombre, 0);
     validacionExpresiones(nombre, nombreExp, 0);
 });
 
-nombre.addEventListener('keypress', ()=>{
-    validaciones(nombre, 0);
+nombre.addEventListener('keyup', ()=>{
+    // validaciones(nombre, 0);
     validacionExpresiones(nombre, nombreExp, 0)
 });
 
 // Validaciones del apellido
 apellido1.addEventListener('blur', ()=>{
-    validaciones(apellido1, 1);
+    // validaciones(apellido1, 1);
     validacionExpresiones(nombre, nombreExp, 1);
-
 });
 
-apellido1.addEventListener('keypress', ()=>{
-    validaciones(apellido1, 1);
+apellido1.addEventListener('keyup', ()=>{
+    // validaciones(apellido1, 1);
     validacionExpresiones(apellido1, nombreExp, 1)
 })
 
 
-apellido2.addEventListener('blur', ()=>{
-    validaciones(apellido2, 2);
-    validacionExpresiones(nombre, nombreExp, 2);
+// apellido2.addEventListener('blur', ()=>{
+//     // validaciones(apellido2, 2);
+//     validacionExpresiones(nombre, nombreExp, 2);
 
-});
+// });
 
-apellido2.addEventListener('keypress', ()=>{
-    validaciones(apellido2, 2);
-    validacionExpresiones(apellido1, nombreExp, 2)
-})
+// apellido2.addEventListener('keypress', ()=>{
+//     // validaciones(apellido2, 2);
+//     validacionExpresiones(apellido1, nombreExp, 2)
+// })
 
 // Validaciones del correo
 correo.addEventListener('blur', ()=>{
-    validaciones(correo, 3);
+    // validaciones(correo, 3);
+    validacionExpresiones(correo, regExp, 2);
 });
 correo.addEventListener('keypress', ()=>{
-    validaciones(correo, 3);
-    validacionExpresiones(contraseña, regExp, 3);
+    // validaciones(correo, 3);
+    validacionExpresiones(correo, regExp, 2);
 })
 
 contraseña.addEventListener('blur', ()=>{
-    validaciones(contraseña, 4);
+    // validaciones(contraseña, 4);
     validacionExpresiones(contraseña, passExp, 4);
 });
 
@@ -116,23 +116,27 @@ document.querySelector('#formulario').addEventListener('submit', function(event)
 
 // Funcion para hacer una validacion a todos los elementos
 function validaciones(elemento, numError){
-    if(elemento.value.trim() ===''){
-        elemento.classList.add('incorrecto')
-        errorMensaje[numError].style.display = 'block'
-    }else{
-        elemento.classList.remove('incorrecto')
-        errorMensaje[numError].style.display = 'none'
-    }
 }
 
 // Funcion para validar las expresiones regulares
 function validacionExpresiones(elemento, expresion, numError){
-    if(!expresion.test(elemento.value) && !elemento.classList.contains('incorrecto')){
+    if(elemento.value.trim() ===''){
         elemento.classList.add('incorrecto')
-        errorMensaje[numError].style.display = 'block';
-        // console.log('a');
-    }else{
+        errorMensaje[numError].style.display = 'block'
+        errorMensaje[numError + 1].style.display = 'none';
+    }else if((!expresion.test(elemento.value) ) ){
+        elemento.classList.add('incorrecto')
+        errorMensaje[numError].style.display = 'none'
+        errorMensaje[numError + 1].style.display = 'block';
+        
+    }else if(expresion.test(elemento.value)){
         elemento.classList.remove('incorrecto')
+        errorMensaje[numError + 1].style.display = 'none';
         errorMensaje[numError].style.display = 'none';
+
     }
+    // else{
+    //     elemento.classList.remove('incorrecto')
+    //     errorMensaje[numError].style.display = 'none'
+    // }
 }
