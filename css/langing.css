@@ -1,0 +1,31 @@
+*{
+    margin: 0px;
+}
+header{
+    width: 100%;
+    background-color: brown;
+    display: flex;
+    justify-content: end;
+    
+    & nav{
+        margin-right: 50px;
+    
+        & div{
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+    
+            & a{
+                text-decoration: none;
+                color: antiquewhite;
+                font-weight: bold;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                letter-spacing: 1px;
+            }
+        }
+        & div:hover{
+            background-color: rgb(116, 32, 32);
+            cursor: pointer;
+        }
+    }
+}

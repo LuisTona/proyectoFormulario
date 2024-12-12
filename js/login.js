@@ -7,10 +7,9 @@ form.addEventListener('submit', (e)=>{
     let datos = JSON.parse(localStorage.usuario);
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
-    console.log(datos);
-    // if(datos.nombre == data.user && datos.pass == data.contraseña){
-    //     window.location.replace('./landingPage.html');
-    // }else{
-    //     alert("Nombre o Contraseña Incorrectos");
-    // }
+    if(datos.nombre == data.user && datos.pass == data.contraseña){
+        window.location.replace('./landingPage.html');
+    }else{
+        alert("Nombre o Contraseña Incorrectos");
+    }
 })
