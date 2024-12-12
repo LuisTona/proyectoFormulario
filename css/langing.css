@@ -27,5 +27,8 @@ header{
             background-color: rgb(116, 32, 32);
             cursor: pointer;
         }
+        #usuario{
+            display: none;
+        }
     }
 }

@@ -1,12 +1,9 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f7f7f7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    display: grid;
+    grid-template-rows: 15vh 72vh 13vh;
     margin: 0;
-    flex-direction: column;
     overflow-x: hidden;
     overflow-y: auto;
     box-sizing: border-box;
@@ -18,10 +15,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -49,16 +42,23 @@ form {
     background-color: #d8d8d8;
     border: solid 1px rgba(128, 128, 128, 0.735);
     width: 400px;
+    height: 75%;
     text-align: center;
-    margin-top: 370px;
-    margin-left: 80px;
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-    
     & label{
         display: block;
         margin-top: 12px;
         font-weight: bold;
         color: #333;
+        & span{
+            font-size: 11px;
+        }
     }
 
     & input{
@@ -147,7 +147,6 @@ footer {
     align-items: flex-start;
     padding: 20px;
     background-color: #fff;
-    margin-top: 50px;
     box-sizing: border-box;
     width: 100%;
 }
@@ -165,8 +164,10 @@ footer {
 }
 
 #derecha-footer {
-    flex: 1;
-    padding-left: 20px;
+
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
 }
 
 #derecha-footer strong {
@@ -178,8 +179,10 @@ footer {
     text-decoration: none;
     color: #007bff;
     font-size: 14px;
-    display: block;
-    margin: 5px 0;
+    & p {
+        margin: 0px 0;
+        padding: 3px;
+    }
 }
 
 #derecha-footer a:hover {

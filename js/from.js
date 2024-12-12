@@ -8,21 +8,15 @@ const confirPass= document.getElementById('confirmPass');
 const privacidad = document.getElementById('privacidad');
 const errorMensaje = document.querySelectorAll('.error-message');
 const regExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-const passExp = /[a-zA-Z0-9._%&@€]{8,16}/;
+const passExp = /[a-zA-Z0-9._%&@€]{8,}/;
 const nombreExp=/^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/;
-
-// ^: Inicio de la cadena.
-// [A-Za-zÁÉÍÓÚáéíóúñÑ\s]: La cadena puede contener solo letras (mayúsculas o minúsculas), letras con tildes, la letra ñ y espacios.
-// +: Al menos un carácter debe coincidir con los caracteres permitidos.
-// $: Fin de la cadena.
 
 let campo = [
     {campo: nombre, expresion: nombreExp, valor: 0},
     {campo: apellido1, expresion: nombreExp, valor: 2},
-    {campo: correo, expresion: regExp, valor: 4},
-    {campo: contraseña, expresion: passExp, valor: 6},
-    // {campo: confirPass, expresion: passExp, valor: errorMensaje[8]},
-    // {campo: privacidad, valor: errorMensaje[9]}
+    {campo: apellido2, expresion: nombreExp, valor: 4},
+    {campo: correo, expresion: regExp, valor: 6},
+    {campo: contraseña, expresion: passExp, valor: 8},
 ];
 
 // Validaciones del nombre
@@ -37,20 +31,20 @@ apellido1.addEventListener('blur', ()=>{
 
 // Validaciones del correo
 correo.addEventListener('blur', ()=>{
-    validacionExpresiones(correo, regExp, 4);
+    validacionExpresiones(correo, regExp, 6);
 });
 
 contraseña.addEventListener('blur', ()=>{
-    validacionExpresiones(contraseña, passExp, 6);
+    validacionExpresiones(contraseña, passExp, 8);
 });
 
 confirPass.addEventListener('blur', ()=>{
     if(contraseña.value !== confirPass.value){
         confirPass.classList.add('incorrecto');
-        errorMensaje[8].style.display = 'block';
+        errorMensaje[10].style.display = 'block';
     }else{
         confirPass.classList.remove('incorrecto');
-        errorMensaje[8].style.display = 'none';
+        errorMensaje[10].style.display = 'none';
 
     }
 })
@@ -68,7 +62,8 @@ document.querySelector('#formulario').addEventListener('submit', function(event)
 
             if(campo.value.trim() === ''){
                 campo.classList.add('incorrecto');
-                valor.style.display = 'block';
+                errorMensaje[valor].style.display = 'block';
+
             }else if(contraseña.value === confirPass.value){
                     
                 const formData = new FormData(form);
