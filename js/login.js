@@ -9,6 +9,8 @@ form.addEventListener('submit', (e)=>{
     const data = Object.fromEntries(formData);
     if(datos.nombre == data.user && datos.pass == data.contraseña){
         window.location.replace('./landingPage.html');
+        localStorage.setItem('log', datos.nombre);
+        
     }else{
         alert("Nombre o Contraseña Incorrectos");
     }

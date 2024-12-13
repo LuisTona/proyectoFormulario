@@ -11,24 +11,47 @@ header{
         margin-right: 50px;
     
         & div{
-            width: 100%;
-            padding: 15px;
             text-align: center;
-    
+            font-weight: bold;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            position: relative;
+
             & a{
                 text-decoration: none;
                 color: antiquewhite;
-                font-weight: bold;
-                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                 letter-spacing: 1px;
             }
         }
+        
         & div:hover{
             background-color: rgb(116, 32, 32);
             cursor: pointer;
         }
-        #usuario{
-            display: none;
+        & #login{
+            padding: 15px;
         }
+        & #usuario{
+            display: none;
+            #nombre{
+                height: 100%;
+                padding: 15px;
+            }
+            & #menuDesplegable{
+                display: none;
+                position: absolute;
+                width: 200px;
+                overflow: auto;
+                right: 10px;
+                background-color: rgb(210, 189, 165);
+                & #logout{
+                    padding:10px 0px;
+                }
+            }
+        }
+        & #usuario:hover #menuDesplegable{
+            display: block;
+        }
+
+        
     }
 }
