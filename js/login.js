@@ -8,7 +8,7 @@ form.addEventListener('submit', (e)=>{
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
     if(datos.nombre == data.user && datos.pass == data.contraseña){
-        window.location.replace('./landingPage.html');
+        window.location.replace('./index.html');
         localStorage.setItem('log', datos.nombre);
         
     }else{
