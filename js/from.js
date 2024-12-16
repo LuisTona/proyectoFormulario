@@ -55,9 +55,9 @@ document.querySelector('#formulario').addEventListener('submit', function(event)
     let valido = true;
     if(comprobacionUsuarios(nombre.value)){
         campo.forEach(({campo, expresion, valor}) => {
-            if(valido){
-                valido = validacionExpresiones(campo, expresion, valor);
-            }
+            // if(valido){
+            //     valido = validacionExpresiones(campo, expresion, valor);
+            // }
             validacionExpresiones(campo, expresion, valor);
 
             if(campo.value.trim() === ''){
@@ -68,7 +68,7 @@ document.querySelector('#formulario').addEventListener('submit', function(event)
                     
                 const formData = new FormData(form);
                 const data = Object.fromEntries(formData);
-
+                // fallo en valido entra siempre cuando entra va a estar un campo true, si esta en true valida y registra corregir campo valido
                 if(valido && nombre.value.trim() !== '' && apellido1.value.trim() !== '' && correo.value.trim() !== '' && contraseña.value.trim() !== '' && privacidad.value.trim() !== ''){
                     localStorage.setItem('usuario', JSON.stringify(data));
                     localStorage.setItem('log', data.nombre)
